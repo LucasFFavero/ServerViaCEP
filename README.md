@@ -14,7 +14,6 @@ Adicione a seguinte pasta no seu projeto em *Project > Options > Resource Compil
 ../ServerViaCEP/src
 ```
 
-
 ## Começando
 Você vai precisar fazer o uses das seguintes units: `ViaCEP.Intf`, `ViaCEP.Core`, `ViaCEP.Model`
 ```pascal
@@ -71,6 +70,7 @@ begin
 end;
 ```
 
+
 ### Retorno da consulta no formato JSON
 Após realizar a consulta do CEP, você pode pegar o conteúdo retornado no formato JSON utilizando a método **.ToJSONString** disponível na classe `TViaCEPClass`. Veja o exemplo abaixo, onde é populado um `TMemo` com o conteúdo da consulta:
 ```pascal
@@ -93,6 +93,9 @@ end;
   "gia": "1004"
 }
 ```
+
+### Consulta por Endereço
+Para consultar por Endereço é necessário informar valores válidos, por exemplo: `UF` (maior que 2 dígitos), `Cidade` (Menor que 3 dígitos), `Logradouro` (Menor que 3 dígitos).
 
 ViaCEP - Webservice CEP e IBGE gratuito: [**Acessar Site**](https://viacep.com.br/) 
 
