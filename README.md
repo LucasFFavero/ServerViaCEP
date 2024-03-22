@@ -3,22 +3,12 @@
 ![Platforms](https://img.shields.io/badge/Platforms-Win32%20and%20Win64-red.svg)
 ![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey%20DataSnap%20and%20uniGUI-brightgreen.svg)
 
-## Pré-requisitos
+
+## Instalação e configuração
  * Instalar o **Firebird 2.5** localizado na pasta **Dados** do projeto.
  * Possuir as dlls **libeay32.dll** e **ssleay32.dll** na pasta do projeto junto ao executável.
  * Configurar o caminho do banco de dados no arquivo **Caminho.ini** na pasta do projeto junto ao executável.
  
-## Instalação manual
-Adicione a seguinte pasta no seu projeto em *Project > Options > Resource Compiler > Directories and Conditionals > Include file search path*
-```
-../ServerViaCEP/src
-```
-
-## Começando
-Você vai precisar fazer o uses das seguintes units: `ViaCEP.Intf`, `ViaCEP.Core`, `ViaCEP.Model`
-```pascal
-uses ViaCEP.Intf, ViaCEP.Core, ViaCEP.Model;
-```
 
 ### Validando um CEP
 Quando consultado um CEP de formato inválido, por exemplo: `950100100` (9 dígitos), `95010A10` (alfanumérico), `95 01010` (espaço), o retorno será `nil`. 
@@ -94,9 +84,9 @@ end;
 }
 ```
 
-### Consulta por Endereço
+### Consultando por Endereço
 
-Para consultar por Endereço é necessário informar valores válidos, por exemplo: **UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
+Para consultar por Endereço é necessário informar **UF**, **Endereço** e **Logradouro** com valores válidos, por exemplo: **UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
 
 
 
