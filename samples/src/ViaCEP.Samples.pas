@@ -97,6 +97,8 @@ type
     rbEndereco: TRadioButton;
     edtUFConsultar: TEdit;
     edtCidadeConsultar: TEdit;
+    dbgRetornados: TDBGrid;
+    dtsRetornados: TDataSource;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnValidarClick(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -114,11 +116,13 @@ type
     procedure rbEnderecoClick(Sender: TObject);
     procedure dbgArmazenadosDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure dbgRetornadosDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     FMemCeps: TFDMemTable;
+    FMemLogradouros: TFDMemTable;
   public
     FirebirdConn: TFirebirdConnection;
-
   end;
 
 var
@@ -129,6 +133,19 @@ implementation
 uses ViaCEP.Intf, ViaCEP.Core, ViaCEP.Model;
 
 {$R *.dfm}
+
+function RemoverAcentos(const Str: string): string;
+const
+  ComAcentos = '·‡„‚ÈÍÌÛÙı˙¸Á¡¿√¬… Õ”‘’⁄‹«';
+  SemAcentos = 'aaaaeeiooouucAAAAEEIOOOUUC';
+var
+  I: Integer;
+begin
+  Result := Str;
+  for I := 1 to Length(ComAcentos) do
+    Result := StringReplace(Result, ComAcentos[I], SemAcentos[I],
+      [rfReplaceAll]);
+end;
 
 function RemoverMascaraCEP(const CEP: string): string;
 var
@@ -158,17 +175,40 @@ end;
 procedure TFrmMain.dbgArmazenadosDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if gdSelected in State then
+  if not FMemCeps.IsEmpty then
   begin
-    with dbgArmazenados.Canvas do
+    if gdSelected in State then
     begin
-      Brush.Color := $002CAE00;
-      FillRect(Rect);
-      Font.Style := [fsBold]
+      with dbgArmazenados.Canvas do
+      begin
+        Brush.Color := $002CAE00;
+        FillRect(Rect);
+        Font.Style := [fsBold]
+      end;
     end;
+
+    dbgArmazenados.DefaultDrawDataCell(Rect, dbgArmazenados.columns[DataCol]
+      .Field, State);
   end;
-  dbgArmazenados.DefaultDrawDataCell(Rect, dbgArmazenados.columns[DataCol]
-    .Field, State);
+end;
+
+procedure TFrmMain.dbgRetornadosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if not FMemLogradouros.IsEmpty then
+  begin
+    if gdSelected in State then
+    begin
+      with dbgRetornados.Canvas do
+      begin
+        Brush.Color := $002CAE00;
+        FillRect(Rect);
+        Font.Style := [fsBold]
+      end;
+    end;
+    dbgRetornados.DefaultDrawDataCell(Rect, dbgRetornados.columns[DataCol]
+      .Field, State);
+  end;
 end;
 
 procedure TFrmMain.btnBuscarClick(Sender: TObject);
@@ -207,45 +247,75 @@ var
   ViaCEP: IViaCEP;
   CEP: TViaCEPClass;
   strConsultar: String;
+  FIdSeq, I: Integer;
 begin
-  ViaCEP := TViaCEP.Create;
-
-  // Tipo da Consulta
-  if rbCEP.Checked then
-    strConsultar := edtCEPConsultar.Text
-  else
-    strConsultar := edtUFConsultar.Text + '/' + edtCidadeConsultar.Text + '/' +
-      edtEnderecoConsultar.Text;
-
-  // Tipo retorno
-  if (rbJson.Checked) then
-    CEP := ViaCEP.Get(strConsultar)
-  else
-    CEP := ViaCEP.GetXml(strConsultar);
-
-  if not Assigned(CEP) then
-  begin
-    ShowMessage('EndereÁo n„o localizado.');
-    Exit;
-  end;
-
   try
-    if (rbJson.Checked) then
-      edtJSON_Xml.Lines.Text := CEP.ToJSONString
-    else
-      edtJSON_Xml.Lines.Text := CEP.ToXMLString;
+    ViaCEP := TViaCEP.Create;
 
-    edtCEP.Text := CEP.CEP;
-    edtLogradouro.Text := CEP.Logradouro;
-    edtComplemento.Text := CEP.Complemento;
-    edtBairro.Text := CEP.Bairro;
-    edtLocalidade.Text := CEP.Localidade;
-    edtUF.Text := CEP.UF;
-    edtDDD.Text := CEP.DDD;
-    edtIBGE.Text := CEP.IBGE;
-    edtGIA.Text := CEP.GIA;
+    if rbCEP.Checked then
+    begin
+      strConsultar := edtCEPConsultar.Text;
+
+      // Tipo retorno
+      if (rbJson.Checked) then
+        CEP := ViaCEP.GetJSON(strConsultar)
+      else
+        CEP := ViaCEP.GetXml(strConsultar);
+
+      if not Assigned(CEP) then
+      begin
+        ShowMessage('EndereÁo n„o localizado.');
+        Exit;
+      end;
+
+      try
+        if (rbJson.Checked) then
+          edtJSON_Xml.Lines.Text := CEP.ToJSONString
+        else
+          edtJSON_Xml.Lines.Text := CEP.ToXMLString;
+
+        edtCEP.Text := CEP.CEP;
+        edtLogradouro.Text := CEP.Logradouro;
+        edtComplemento.Text := CEP.Complemento;
+        edtBairro.Text := CEP.Bairro;
+        edtLocalidade.Text := CEP.Localidade;
+        edtUF.Text := CEP.UF;
+        edtDDD.Text := CEP.DDD;
+        edtIBGE.Text := CEP.IBGE;
+        edtGIA.Text := CEP.GIA;
+      finally
+        CEP.Free;
+      end;
+    end
+    else
+    begin
+      dbgRetornados.DataSource := nil;
+      dtsRetornados.DataSet := nil;
+
+      strConsultar := edtUFConsultar.Text + '/' + edtCidadeConsultar.Text + '/'
+        + edtEnderecoConsultar.Text;
+
+      if (rbJson.Checked) then
+      begin
+        FMemLogradouros := ViaCEP.GetLogradouroJSON(strConsultar);
+        edtJSON_Xml.Lines.loadfromfile(ExtractFilePath(ParamStr(0)) +
+          'LogradouroJSON.txt');
+      end
+      else
+      begin
+        FMemLogradouros := ViaCEP.GetLogradouroXML(strConsultar);
+        edtJSON_Xml.Lines.loadfromfile(ExtractFilePath(ParamStr(0)) +
+          'LogradouroXML.txt');
+      end;
+
+      if (Assigned(FMemLogradouros)) and (not FMemLogradouros.IsEmpty) then
+      begin
+        dtsRetornados.DataSet := FMemLogradouros;
+        dbgRetornados.DataSource := dtsRetornados;
+        FMemLogradouros.First;
+      end;
+    end;
   finally
-    CEP.Free;
   end;
 end;
 
@@ -273,9 +343,18 @@ begin
 
   try
     DataManager := TFirebirdDataManager.Create(FirebirdConn.Connection);
-    DataManager.ExecuteQuery
-      ('SELECT VIACEP.CODIGO FROM VIACEP WHERE VIACEP.CEP = ' +
-      quotedstr(RemoverMascaraCEP(edtCEPConsultar.Text)));
+
+    // Verifica se o endereÁo est· armazenado
+    if rbCEP.Checked then
+      DataManager.ExecuteQuery
+        ('SELECT VIACEP.CODIGO FROM VIACEP WHERE VIACEP.CEP = ' +
+        quotedstr(RemoverMascaraCEP(edtCEPConsultar.Text)))
+    else
+      DataManager.ExecuteQuery
+        ('SELECT VIACEP.CODIGO FROM VIACEP WHERE VIACEP.UF = ' +
+        quotedstr(edtUFConsultar.Text) + ' AND VIACEP.LOCALIDADE = ' +
+        quotedstr(edtCidadeConsultar.Text) + ' AND VIACEP.LOGRADOURO LIKE ' +
+        quotedstr('%' + edtEnderecoConsultar.Text + '%'));
 
     if not DataManager.IsEmpty then
     begin
@@ -292,7 +371,6 @@ begin
           mtConfirmation, mbYesNo, 0) = mrYes then
         begin
           EfetuarConsulta;
-
           AtualizarRegistro(DataManager.GetFieldValue('CODIGO'));
         end;
       end;
@@ -300,7 +378,6 @@ begin
     else
     begin
       EfetuarConsulta;
-
       InserirRegistro;
     end;
   finally
@@ -315,6 +392,9 @@ begin
   if (Assigned(FMemCeps)) then
     FreeAndNil(FMemCeps);
 
+  if (Assigned(FMemLogradouros)) then
+    FreeAndNil(FMemLogradouros);
+
   try
     FirebirdConn.Disconnect;
     FirebirdConn.Free;
@@ -328,7 +408,7 @@ var
   Caminho, servidor, usuario, senha: string;
 begin
   // ConfiguraÁıes do banco de dados
-  AssignFile(FArquivo, ExtractFilePath(paramstr(0)) + 'Caminho.ini');
+  AssignFile(FArquivo, ExtractFilePath(ParamStr(0)) + 'Caminho.ini');
   Reset(FArquivo);
   Readln(FArquivo, servidor);
   Readln(FArquivo, Caminho);
@@ -367,6 +447,9 @@ begin
   else
     lblTipo.Caption := 'Xml';
 
+  if Assigned(FMemLogradouros) then
+    FMemLogradouros.EmptyDataSet;
+
   // Limpa campos
   edtCEP.Clear;
   edtLogradouro.Clear;
@@ -389,6 +472,14 @@ end;
 
 procedure TFrmMain.TipoConsulta;
 begin
+  if rbCEP.Checked then
+    dbgRetornados.Visible := false
+  else
+    dbgRetornados.Visible := true;
+
+  if Assigned(FMemLogradouros) then
+    FMemLogradouros.EmptyDataSet;
+
   // Limpa campos consultar
   edtCEPConsultar.Clear;
   edtUFConsultar.Clear;
@@ -417,16 +508,54 @@ begin
   try
     FDQuery.Connection := FirebirdConn.FConnection;
 
-    FDQuery.SQL.Text :=
-      'INSERT INTO VIACEP (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF) VALUES (:CEP, :LOGRADOURO, :COMPLEMENTO, :BAIRRO, :LOCALIDADE, :UF)';
-    FDQuery.ParamByName('CEP').Value := RemoverMascaraCEP(edtCEP.Text);
-    FDQuery.ParamByName('LOGRADOURO').Value := edtLogradouro.Text;
-    FDQuery.ParamByName('COMPLEMENTO').Value := edtComplemento.Text;
-    FDQuery.ParamByName('BAIRRO').Value := edtBairro.Text;
-    FDQuery.ParamByName('LOCALIDADE').Value := edtLocalidade.Text;
-    FDQuery.ParamByName('UF').Value := edtUF.Text;
+    if rbCEP.Checked then
+    begin
+      FDQuery.SQL.Text :=
+        'INSERT INTO VIACEP (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF) VALUES (:CEP, :LOGRADOURO, :COMPLEMENTO, :BAIRRO, :LOCALIDADE, :UF)';
+      FDQuery.ParamByName('CEP').Value :=
+        RemoverMascaraCEP(UpperCase(RemoverAcentos(edtCEP.Text)));
+      FDQuery.ParamByName('LOGRADOURO').Value :=
+        UpperCase(RemoverAcentos(edtLogradouro.Text));
+      FDQuery.ParamByName('COMPLEMENTO').Value :=
+        UpperCase(RemoverAcentos(edtComplemento.Text));
+      FDQuery.ParamByName('BAIRRO').Value :=
+        UpperCase(RemoverAcentos(edtBairro.Text));
+      FDQuery.ParamByName('LOCALIDADE').Value :=
+        UpperCase(RemoverAcentos(edtLocalidade.Text));
+      FDQuery.ParamByName('UF').Value := UpperCase(RemoverAcentos(edtUF.Text));
+      FDQuery.ExecSQL;
+    end
+    else
+    begin
+      FMemLogradouros.First;
+      while not FMemLogradouros.Eof do
+      begin
+        FDQuery.SQL.Text :=
+          'INSERT INTO VIACEP (CEP, LOGRADOURO, COMPLEMENTO, BAIRRO, LOCALIDADE, UF) VALUES (:CEP, :LOGRADOURO, :COMPLEMENTO, :BAIRRO, :LOCALIDADE, :UF)';
+        FDQuery.ParamByName('CEP').Value :=
+          UpperCase(RemoverAcentos(RemoverMascaraCEP(FMemLogradouros.FieldByName
+          ('CEP').Value)));
+        FDQuery.ParamByName('LOGRADOURO').Value :=
+          UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+          ('LOGRADOURO').Value));
+        FDQuery.ParamByName('COMPLEMENTO').Value :=
+          UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+          ('COMPLEMENTO').Value));
+        FDQuery.ParamByName('BAIRRO').Value :=
+          UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+          ('BAIRRO').Value));
+        FDQuery.ParamByName('LOCALIDADE').Value :=
+          UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+          ('LOCALIDADE').Value));
+        FDQuery.ParamByName('UF').Value :=
+          UpperCase(RemoverAcentos(FMemLogradouros.FieldByName('UF').Value));
+        FDQuery.ExecSQL;
 
-    FDQuery.ExecSQL;
+        FMemLogradouros.Next;
+      end;
+
+      FMemLogradouros.First;
+    end;
   finally
     FDQuery.Free;
   end;
@@ -441,14 +570,52 @@ begin
   try
     FDQuery.Connection := FirebirdConn.FConnection;
 
-    FDQuery.SQL.Text := 'UPDATE VIACEP SET CEP = ' +
-      quotedstr(RemoverMascaraCEP(edtCEP.Text)) + ', LOGRADOURO = ' +
-      quotedstr(edtLogradouro.Text) + ', COMPLEMENTO = ' +
-      quotedstr(edtComplemento.Text) + ', BAIRRO = ' + quotedstr(edtBairro.Text)
-      + ', LOCALIDADE = ' + quotedstr(edtLocalidade.Text) + ', UF = ' +
-      quotedstr(edtUF.Text) + ' WHERE CODIGO = ' + InttoStr(Codigo);
+    if rbCEP.Checked then
+    begin
+      FDQuery.SQL.Text := 'UPDATE VIACEP SET CEP = ' +
+        quotedstr(RemoverMascaraCEP(UpperCase(RemoverAcentos(edtCEP.Text)))) +
+        ', LOGRADOURO = ' +
+        quotedstr(UpperCase(RemoverAcentos(edtLogradouro.Text))) +
+        ', COMPLEMENTO = ' +
+        quotedstr(UpperCase(RemoverAcentos(edtComplemento.Text))) +
+        ', BAIRRO = ' + quotedstr(UpperCase(RemoverAcentos(edtBairro.Text))) +
+        ', LOCALIDADE = ' +
+        quotedstr(UpperCase(RemoverAcentos(edtLocalidade.Text))) + ', UF = ' +
+        quotedstr(RemoverAcentos(edtUF.Text)) + ' WHERE CODIGO = ' +
+        InttoStr(Codigo);
+      FDQuery.ExecSQL;
+    end
+    else
+    begin
+      if (Assigned(FMemLogradouros)) and (not FMemLogradouros.IsEmpty) then
+      begin
+        FMemLogradouros.First;
+        while not FMemLogradouros.Eof do
+        begin
+          FDQuery.SQL.Text := 'UPDATE VIACEP SET CEP = ' +
+            quotedstr(RemoverMascaraCEP
+            (UpperCase(RemoverAcentos(RemoverMascaraCEP
+            (FMemLogradouros.FieldByName('CEP').Value))))) + ', LOGRADOURO = ' +
+            quotedstr(UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+            ('LOGRADOURO').Value))) + ', COMPLEMENTO = ' +
+            quotedstr(UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+            ('COMPLEMENTO').Value))) + ', BAIRRO = ' +
+            quotedstr(UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+            ('BAIRRO').Value))) + ', LOCALIDADE = ' +
+            quotedstr(UpperCase(RemoverAcentos(FMemLogradouros.FieldByName
+            ('LOCALIDADE').Value))) + ', UF = ' +
+            quotedstr(UpperCase(RemoverAcentos(FMemLogradouros.FieldByName('UF')
+            .Value))) + ' WHERE CEP = ' +
+            UpperCase(RemoverAcentos
+            (RemoverMascaraCEP(FMemLogradouros.FieldByName('CEP').Value)));
+          FDQuery.ExecSQL;
 
-    FDQuery.ExecSQL;
+          FMemLogradouros.Next;
+        end;
+
+        FMemLogradouros.First;
+      end;
+    end;
 
     ShowMessage('AtualizaÁ„o efetuada com sucesso.');
   finally

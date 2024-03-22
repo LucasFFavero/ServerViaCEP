@@ -7,7 +7,9 @@ uses
   ViaCEP.Model in '..\src\ViaCEP.Model.pas',
   ViaCEP.Samples in 'src\ViaCEP.Samples.pas' {FrmMain},
   FirebirdConnection in '..\src\FirebirdConnection.pas',
-  FirebirdDataManager in '..\src\FirebirdDataManager.pas';
+  FirebirdDataManager in '..\src\FirebirdDataManager.pas',
+  Pkg.Json.DTO in '..\src\Pkg.Json.DTO.pas',
+  ViaCEP.Itens in '..\src\ViaCEP.Itens.pas';
 
 {$R *.res}
 

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmlcep>
+	<enderecos>
+		<endereco>
+			<cep>15800-040</cep>
+			<logradouro>Rua ParÃ¡</logradouro>
+			<complemento></complemento>
+			<bairro>Centro</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15800-971</cep>
+			<logradouro>Rua ParÃ¡</logradouro>
+			<complemento>9</complemento>
+			<bairro>Centro</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15813-115</cep>
+			<logradouro>Rua Parati</logradouro>
+			<complemento>atÃ© 523/524</complemento>
+			<bairro>Jardim Imperial</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15813-263</cep>
+			<logradouro>Rua Parati</logradouro>
+			<complemento>de 525/526 ao fim</complemento>
+			<bairro>Residencial Nova Catanduva I</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15806-080</cep>
+			<logradouro>Rua ParanÃ¡</logradouro>
+			<complemento></complemento>
+			<bairro>SÃ£o Francisco</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15810-466</cep>
+			<logradouro>Rua Paracatu</logradouro>
+			<complemento></complemento>
+			<bairro>Loteamento Cidade Jardim</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15800-410</cep>
+			<logradouro>Rua Paraguay</logradouro>
+			<complemento></complemento>
+			<bairro>Vila Juca Pedro</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15800-070</cep>
+			<logradouro>Rua ParaÃ­ba</logradouro>
+			<complemento></complemento>
+			<bairro>Centro</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15806-130</cep>
+			<logradouro>Rua ParaÃ­so</logradouro>
+			<complemento></complemento>
+			<bairro>Jardim Santa Rosa</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15809-040</cep>
+			<logradouro>Rua ParapuÃ£</logradouro>
+			<complemento></complemento>
+			<bairro>Parque Iracema</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15803-026</cep>
+			<logradouro>Rua Guatapara</logradouro>
+			<complemento></complemento>
+			<bairro>Vila Maria Jorge</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15808-282</cep>
+			<logradouro>Rua ParanapuÃ£</logradouro>
+			<complemento></complemento>
+			<bairro>Jardim Eldorado</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15808-252</cep>
+			<logradouro>Rua ParanaguÃ¡</logradouro>
+			<complemento></complemento>
+			<bairro>Loteamento Bom Pastor</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15808-266</cep>
+			<logradouro>Rua ValparaÃ­so</logradouro>
+			<complemento></complemento>
+			<bairro>Loteamento Bom Pastor</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15808-148</cep>
+			<logradouro>Estrada para Ariranha</logradouro>
+			<complemento></complemento>
+			<bairro>Conjunto Habitacional Euclides Figueiredo</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+		<endereco>
+			<cep>15802-261</cep>
+			<logradouro>Rua Bela Vista do Paraiso</logradouro>
+			<complemento></complemento>
+			<bairro>Vila Dona Engracia Agudo RomÃ£o</bairro>
+			<localidade>Catanduva</localidade>
+			<uf>SP</uf>
+			<ibge>3511102</ibge>
+			<gia>2604</gia>
+			<ddd>17</ddd>
+			<siafi>6323</siafi>
+		</endereco>
+	</enderecos>
+</xmlcep>

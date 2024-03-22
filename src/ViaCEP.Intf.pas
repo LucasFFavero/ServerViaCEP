@@ -3,31 +3,17 @@ unit ViaCEP.Intf;
 interface
 
 uses
-  ViaCEP.Model;
+  ViaCEP.Model, ViaCEP.Itens, Pkg.Json.DTO, FireDAC.Comp.Client;
 
 type
   IViaCEP = interface
     ['{202D4AB9-6B89-4CFF-A080-9DBC09D66737}']
-    /// <summary>
-    /// Consuma a API do viacep.com.br para obter os dados referentes a um determinado CEP.
-    /// </summary>
-    /// <param name="ACep">
-    /// Refers to the CEP that will be consulted.
-    /// </param>
-    /// <returns>
-    /// Returns an instance of the TCEPClass class.
-    /// </returns>
-    function Get(const ACep: string): TViaCEPClass;
+    // Consuma a API do viacep.com.br para obter os dados referentes a um determinado CEP.
+    function GetJSON(const ACep: string): TViaCEPClass;
     function GetXml(const ACep: string): TViaCEPClass;
-    /// <summary>
-    /// Checks if CEP is valid.
-    /// </summary>
-    /// <param name="ACep">
-    /// Refers to the CEP that will be consulted.
-    /// </param>
-    /// <returns>
-    /// Returns True if successful.
-    /// </returns>
+    function GetLogradouroJSON(const ACep: string): TFDMemTable;
+    function GetLogradouroXML(const ACep: string): TFDMemTable;
+
     function Validate(const ACep: string): Boolean;
   end;
 

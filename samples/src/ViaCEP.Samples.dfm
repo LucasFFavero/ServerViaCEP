@@ -389,6 +389,7 @@ object FrmMain: TFrmMain
             Top = 22
             Width = 665
             Height = 21
+            CharCase = ecUpperCase
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -496,6 +497,7 @@ object FrmMain: TFrmMain
             Top = 22
             Width = 450
             Height = 21
+            CharCase = ecUpperCase
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -519,6 +521,7 @@ object FrmMain: TFrmMain
             Top = 134
             Width = 121
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -534,6 +537,7 @@ object FrmMain: TFrmMain
             Top = 134
             Width = 365
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -549,6 +553,7 @@ object FrmMain: TFrmMain
             Top = 182
             Width = 385
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -564,6 +569,7 @@ object FrmMain: TFrmMain
             Top = 182
             Width = 355
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -579,6 +585,7 @@ object FrmMain: TFrmMain
             Top = 230
             Width = 385
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -594,6 +601,7 @@ object FrmMain: TFrmMain
             Top = 230
             Width = 58
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -609,6 +617,7 @@ object FrmMain: TFrmMain
             Top = 230
             Width = 291
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -624,6 +633,7 @@ object FrmMain: TFrmMain
             Top = 134
             Width = 121
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -639,6 +649,7 @@ object FrmMain: TFrmMain
             Top = 134
             Width = 121
             Height = 21
+            CharCase = ecUpperCase
             Color = clBtnFace
             Enabled = False
             Font.Charset = ANSI_CHARSET
@@ -655,13 +666,14 @@ object FrmMain: TFrmMain
             Width = 746
             Height = 170
             Color = clBtnFace
-            Enabled = False
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
+            ReadOnly = True
+            ScrollBars = ssBoth
             TabOrder = 14
           end
           object edtEnderecoConsultar: TEdit
@@ -700,14 +712,14 @@ object FrmMain: TFrmMain
             OnClick = rbXmlClick
           end
           object Panel2: TPanel
-            Left = 8
+            Left = 7
             Top = 22
             Width = 80
             Height = 65
             BevelOuter = bvNone
             TabOrder = 17
             object rbCEP: TRadioButton
-              Left = 8
+              Left = 9
               Top = 2
               Width = 70
               Height = 17
@@ -756,6 +768,21 @@ object FrmMain: TFrmMain
             ParentFont = False
             TabOrder = 2
             TextHint = 'Informe a Cidade'
+          end
+          object dbgRetornados: TDBGrid
+            Left = 16
+            Top = 112
+            Width = 746
+            Height = 139
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            TabOrder = 18
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Segoe UI'
+            TitleFont.Style = [fsBold]
+            Visible = False
+            OnDrawColumnCell = dbgRetornadosDrawColumnCell
           end
         end
       end
@@ -861,6 +888,10 @@ object FrmMain: TFrmMain
   end
   object dtsArmazenados: TDataSource
     Left = 708
-    Top = 600
+    Top = 599
+  end
+  object dtsRetornados: TDataSource
+    Left = 628
+    Top = 599
   end
 end

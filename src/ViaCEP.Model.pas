@@ -13,9 +13,7 @@ uses
   REST.Json.Types;
 
 type
-  /// <summary>
-  /// Class representing the data returned by the ViaCEP API.
-  /// </summary>
+  // Class representing the data returned by the ViaCEP API.
   TViaCEPClass = class
   private
     FLogradouro: string;
@@ -51,23 +49,10 @@ type
     property IBGE: string read FIBGE write SetIBGE;
     property GIA: string read FGIA write SetGIA;
     property DDD: string read FDDD write SetDDD;
-    /// <summary>
-    /// Converts the current instance of the TCEPClass class to a JSON in the string format.
-    /// </summary>
-    /// <returns>
-    /// Returns a JSONObject in string format.
-    /// </returns>
+
     function ToJSONString: string;
     function ToXMLString: string;
-    /// <summary>
-    /// Instance an object of class TCEPClass with the data of a JSON in the string format.
-    /// </summary>
-    /// <param name="AJSONString">
-    /// JSON containing the data of class TCEPClass in the string format.
-    /// </param>
-    /// <returns>
-    /// Returns an instance of the TCEPClass class.
-    /// </returns>
+
     class function FromJSONString(const AJSONString: string): TViaCEPClass;
     class function FromXMLString(const XMLString: string): TViaCEPClass;
   end;
