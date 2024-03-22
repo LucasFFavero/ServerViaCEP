@@ -84,10 +84,9 @@ end;
 }
 ```
 
-### Consultando por Endereço
+### Consultando um Endereço
 
-Para consultar por Endereço é necessário informar **UF**, **Endereço** e **Logradouro** com valores válidos, por exemplo: **UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
-
+Para consultar um endereço é necessário informar **UF**, **Endereço** e **Logradouro** com valores válidos, por exemplo: **UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
 
 
 ViaCEP - Webservice CEP e IBGE gratuito: [**Acessar Site**](https://viacep.com.br/) 
