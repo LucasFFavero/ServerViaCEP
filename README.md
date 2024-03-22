@@ -4,7 +4,7 @@
 ![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey%20DataSnap%20and%20uniGUI-brightgreen.svg)
 
 ## Pré-requisitos
- * Instalar o Firebird 2.5 localizado na pasta Dados do projeto.
+ * Instalar o **Firebird 2.5** localizado na pasta **Dados** do projeto.
  * Possuir as dlls **libeay32.dll** e **ssleay32.dll** na pasta do projeto junto ao executável.
  * Configurar o caminho do banco de dados no arquivo **Caminho.ini** na pasta do projeto junto ao executável.
  
