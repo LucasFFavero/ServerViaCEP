@@ -1,5 +1,5 @@
 # ServerViaCEP - Consulta de CEP de todo o Brasil
-![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE%20and%20ever-blue.svg)
+![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-10.2%20and%20ever-blue.svg)
 ![Platforms](https://img.shields.io/badge/Platforms-Win32%20and%20Win64-red.svg)
 ![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey%20DataSnap%20and%20uniGUI-brightgreen.svg)
 
@@ -12,6 +12,9 @@ Adicione a seguinte pasta no seu projeto em *Project > Options > Resource Compil
 ```
 ../ServerViaCEP/src
 ```
+
+Configure o caminho do banco de dados no arquivo **Caminho.ini** na pasta do projeto junto ao executável.
+
 
 ## Começando
 Você vai precisar fazer o uses das seguintes units: `ViaCEP.Intf`, `ViaCEP.Core`, `ViaCEP.Model`
