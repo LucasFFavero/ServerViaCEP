@@ -101,14 +101,14 @@ end;
 ```
 <?xml version="1.0"?>
 <xmlcep>
-    <cep>15830-000</cep>
-    <logradouro></logradouro>
+    <cep>15800-010</cep>
+    <logradouro>Rua Treze de Maio</logradouro>
    <complemento></complemento>
-   <bairro></bairro>
-   <localidade>Pindorama</localidade>
+   <bairro>Centro</bairro>
+   <localidade>Catanduva</localidade>
     <UF>SP</UF>
-   <ibge>3538105</ibge>
-   <gia>5290</gia>
+   <ibge>3511102</ibge>
+   <gia>2604</gia>
    <ddd>17</ddd>
 </xmlcep>
 ```
@@ -116,9 +116,11 @@ end;
 
 ### Consultando um Endereço
 
-Para consultar um endereço é necessário informar **UF**, **Endereço** e **Logradouro** com valores válidos, por exemplo: **UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
+Para consultar um endereço é necessário informar **UF**, **Endereço** e **Logradouro** com valores válidos, por exemplo: 
+**UF** (2 dígitos), **Cidade** (maior que 3 dígitos) e **Logradouro** (maior que 3 dígitos).
 
-Vale lembrar que a consulta por endereço pode retornar mais de um registro, por exemplo: UF='SP', Cidade='CATANDUVA' e Logradouro='PARA'. 
+Vale lembrar que a consulta por endereço pode retornar mais de um registro, por exemplo: 
+UF='SP', Cidade='CATANDUVA' e Logradouro='PARA'. 
 
 Nesses casos, será exibida uma grade com todos os registros encontrados.
 
