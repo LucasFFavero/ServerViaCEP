@@ -125,7 +125,7 @@ UF='SP', Cidade='CATANDUVA' e Logradouro='PARA'.
 Nesses casos, será exibida uma grade com todos os registros encontrados.
 
 
-### Informações gerais
+## Informações gerais
 
 É possível efetuar consultas tanto por **CEP** quanto por **Endereço**.
 
@@ -139,6 +139,7 @@ Ao efetuar uma consulta, caso o endereço já tenha sido armazenado no banco de 
 
 
 ## Links úteis
+
 Origem código IBGE dos municípios: [**Acessar Site**](https://cidades.ibge.gov.br/) 
 
 Origem código GIA/ICMS (apenas SP disponível): [**Visualizar PDF (Pág.137)**](https://portal.fazenda.sp.gov.br/servicos/gia/Downloads/pre_formatado_ngia_v0210_gia0801.pdf)
