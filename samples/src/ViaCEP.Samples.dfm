@@ -692,7 +692,7 @@ object FrmMain: TFrmMain
             TextHint = 'Informe o Logradouro'
           end
           object rbJson: TRadioButton
-            Left = 568
+            Left = 575
             Top = 24
             Width = 50
             Height = 17
@@ -770,9 +770,9 @@ object FrmMain: TFrmMain
             TextHint = 'Informe a Cidade'
           end
           object dbgRetornados: TDBGrid
-            Left = 16
+            Left = 15
             Top = 112
-            Width = 746
+            Width = 747
             Height = 139
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             TabOrder = 18
